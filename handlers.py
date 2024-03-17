@@ -25,9 +25,7 @@ async def menu(msg: Message):
 @router.callback_query(F.data == "count_pecanbons")
 async def input_text_prompt(clbck: CallbackQuery, state: FSMContext):
     await state.set_state(Gen.count_pecanbons)
-    await clbck.message.edit_text(text.text_count_pecanbons)
-    await clbck.message.answer(text.gen_count_pecanbons)
-    await clbck.message.answer(text.gen_exit, reply_markup=kb.exit_kb)
+    await clbck.message.edit_text(text.text_count_pecanbons.format(text.text_pecanbon_price))
 
 @router.message(Gen.count_pecanbons)
 @flags.chat_action("typing")
