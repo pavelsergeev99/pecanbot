@@ -41,7 +41,7 @@ async def count_pecanbons_get_input(msg: Message, state: FSMContext):
 async def input_text_prompt(clbck: CallbackQuery, state: FSMContext):
     await state.set_state(Gen.share_with_friends)
     await clbck.message.edit_text(text.text_share_with_friends)
-    await clbck.message.answer(text.gen_exit, reply_markup=kb.exit_kb)
+    await clbck.message.answer(text.gen_exit, reply_markup=kb.iexit_kb)
 
 """
 @router.callback_query(f.data == "")
@@ -52,7 +52,7 @@ async def input_text_prompt(clbck: CallbackQuery, state: FSMContext):
 async def input_text_prompt(clbck: CallbackQuery, state: FSMContext):
     await state.set_state(Gen.about)
     await clbck.message.edit_text(text.text_about)
-    await clbck.message.answer(text.gen_exit, reply_markup=kb.exit_kb)
+    await clbck.message.answer(text.gen_exit, reply_markup=kb.iexit_kb)
 
 """
 @router.message(Gen.text_prompt)
