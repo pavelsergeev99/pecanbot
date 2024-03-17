@@ -33,7 +33,7 @@ async def count_pecanbons_get_input(msg: Message, state: FSMContext):
     prompt = msg.text
     mesg = await msg.answer(text.gen_wait)
     res = await utils.generate_pecanbot_count(prompt)
-    if not res:
+    if res != 0:
         return await mesg.edit_text(text.text_count_pecanbons_negative, reply_markup=kb.iexit_kb)
     await mesg.edit_text(res + text.text_watermark, disable_web_page_preview=True)
 
