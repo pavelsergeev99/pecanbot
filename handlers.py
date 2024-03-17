@@ -15,6 +15,7 @@ router = Router()
 @router.message(Command("start"))
 async def start_handler(msg: Message):
     await msg.answer(text.greet.format(name=msg.from_user.full_name), reply_markup=kb.menu)
+    await msg.answer(text.menu, reply_markup=kb.menu)
 
 @router.message(F.text == "Меню")
 @router.message(F.text == "Выйти в меню")
@@ -27,7 +28,7 @@ async def input_text_prompt(clbck: CallbackQuery, state: FSMContext):
     await state.set_state(Gen.count_pecanbons)
     await clbck.message.edit_text(text.text_count_pecanbons)
     await clbck.message.answer(text.gen_count_pecanbons)
-     #await clbck.message.answer(text.gen_exit, reply_markup=kb.exit_kb)
+    await clbck.message.answer(text.gen_exit, reply_markup=kb.exit_kb)
 
 @router.message(Gen.count_pecanbons)
 @flags.chat_action("typing")
