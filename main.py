@@ -11,15 +11,15 @@ from aiogram.fsm.storage.memory import MemoryStorage
 """Хранилища данных для состояний пользователей"""
 from aiogram.utils.chat_action import ChatActionMiddleware
 
-import config
+from config import config_settings
 """Импорт настроект бота, пока токен"""
 from handlers import router
 """Внутри handler функционал бота"""
 
 # Функция для запуска бота
 async def main():
-    bot = Bot(token=config.BOT_TOKEN, parse_mode=ParseMode.HTML)
-    # Создаем объект бота с токеном И с разметкой сообщений HTML (чтобы не было экранирования символов)
+    bot = Bot(token=config_settings.BOT_TOKEN.get_secret_value())
+    # Создаем объект бота с токеном
     dp = Dispatcher(storage=MemoryStorage())
     # Создаем объект диспетчера
     dp.include_router(router)
