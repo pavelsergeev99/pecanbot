@@ -34,8 +34,10 @@ async def count_pecanbons_get_input(msg: Message, state: FSMContext):
     mesg = await msg.answer(text.gen_wait)
     res = await utils.generate_pecanbot_count(prompt)
     if res == 0:
-        return await mesg.edit_text(text.text_count_pecanbons_negative, reply_markup=kb.iexit_kb)
-    await mesg.edit_text(text.text_count_pecanbons_result.format(prompt, str(res)) + text.text_watermark, disable_web_page_preview=True)
+        await mesg.edit_text(text.text_count_pecanbons_negative, reply_markup=kb.iexit_kb)
+        await state.set_state(Gen.count_pecanbons)
+    else:
+        await mesg.answer(text.text_count_pecanbons_result.format(prompt, str(res)) + text.text_watermark, disable_web_page_preview=True, reply_markup=kb.exit_kb)
 
 @router.callback_query(F.data == "share_with_friends")
 async def input_text_prompt(clbck: CallbackQuery, state: FSMContext):
